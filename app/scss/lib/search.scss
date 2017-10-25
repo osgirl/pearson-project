@@ -1,19 +1,16 @@
 header {
+  text-align: center;
   div.banner {
     background-color: $kb-blue;
     height: 35px;
     width: 100%;
   }
-  img {
-    display: inline-block;
-    max-height: 40px;
-    max-width: 35%;
-  }
+
   div.title-container {
     display: inline-block;
-    text-align: right;
+    text-align: center;
     vertical-align: top;
-    width: 63%;
+    width: 90%;
     height: 40px;
     h1 {
       font-family: $kb-title-font;

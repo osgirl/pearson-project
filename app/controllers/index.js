@@ -2,10 +2,9 @@
 
 module.exports = function(app) {
   app.controller('SearchController', ['$log', '$rootScope', SearchController]);
-  function SearchController($log, $rootScope) {
+  function SearchController($log) {
     this.return = {searchISBN: '', title: '', edition: '', author: '', returnISBN: ''};
     this.error = {searchISBN: ''};
-    this.imageSrc = require('../assets/pearson-logo-writing.png');
     this.showReturn = false;
     this.showError = false;
 
