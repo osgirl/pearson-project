@@ -1,0 +1,52 @@
+<section class="wrapper">
+  <header>
+    <div class="banner"></div>
+    <img src="{{$ctrl.imageSrc}}">
+    <div class="title-container">
+      <h1> ISBN Search Tool </h1>
+    </div>
+  </header>
+  <main>
+    <form ng-submit="$ctrl.search($ctrl.searchISBN)">
+      <label for="ISBN">Search by ISBN:</label>
+      <input type="text" name="ISBN" autocomplete="off" autofocus="true" maxlength="13" placeholder="ISBN" required="true" ng-model="$ctrl.searchISBN">
+      <button type="submit" name="button">Search</button>
+    </form>
+    <article ng-show="$ctrl.showError">
+      <div class="return-group">
+        <p class="kb-label">You searched this ISBN:</p>
+        <p>{{$ctrl.error.searchISBN}}</p>
+      </div>
+      <div class="return-group">
+        <p class="kb-error">No results for that ISBN</p>
+      </div>
+      <button type="button" ng-click="$ctrl.clearReturn">Clear Results</button>
+    </article>
+    <article ng-show="$ctrl.showReturn">
+      <div class="return-group">
+        <p class="kb-label">You searched this ISBN:</p>
+        <p>{{$ctrl.return.searchISBN}}</p>
+      </div>
+      <div class="return-book">
+        <div class="book-group">
+          <p class="kb-label">Title:</p>
+          <p>{{$ctrl.return.title}}</p>
+        </div>
+        <div class="book-group">
+          <p class="kb-label">Edition:</p>
+          <p>{{$ctrl.return.edition}}</p>
+        </div>
+        <div class="book-group">
+          <p class="kb-label">Author(s):</p>
+          <p>{{$ctrl.return.author}}</p>
+        </div>
+      </div>
+      <div class="return-group">
+        <p class="kb-label">You need this ISBN:</p>
+        <p>{{$ctrl.return.returnISBN}}</p>
+      </div>
+      <button type="button" ng-click="$ctrl.clearReturn()">Clear Results</button>
+    </article>
+  </main>
+</section>
+<footer></footer>

@@ -1,0 +1,43 @@
+{
+  "name": "pearson-project",
+  "version": "1.0.0",
+  "description": "A demo of a tool that receives an ISBN, and returns a books title and author, confirming it is the correct book, as well as the ISBN that a bookstore will need to purchase the correct version of the book.",
+  "main": "index.js",
+  "scripts": {
+    "watch": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "heroku-postbuild": "./node_modules/webpack/bin/webpack.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keiranbeaton/pearson-project.git"
+  },
+  "keywords": [],
+  "author": "Keiran Beaton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keiranbeaton/pearson-project/issues"
+  },
+  "homepage": "https://github.com/Keiranbeaton/pearson-project#readme",
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "webpack-dev-server": "^2.9.3"
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-route": "^1.6.6",
+    "autoprefixer": "^7.1.6",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.1",
+    "file-loader": "^1.1.5",
+    "html-loader": "^0.5.1",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.8",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.8.1"
+  }
+}

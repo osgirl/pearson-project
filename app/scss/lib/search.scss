@@ -1,0 +1,115 @@
+header {
+  div.banner {
+    background-color: $kb-blue;
+    height: 35px;
+    width: 100%;
+  }
+  img {
+    display: inline-block;
+    max-height: 40px;
+    max-width: 35%;
+  }
+  div.title-container {
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    width: 63%;
+    height: 40px;
+    h1 {
+      font-family: $kb-title-font;
+      font-size: 1em;
+      color: $kb-aqua;
+      display: inline-block;
+      margin: 0;
+      line-height: 40px;
+    }
+  }
+}
+
+main {
+  margin-top: 20px;
+  form {
+    padding-left: 5%;
+    padding-right: 5%;
+    label {
+      display: block;
+      font-family: $kb-text-font;
+      font-size: 1em;
+      color: $kb-blue;
+      line-height: 25px;
+    }
+    input {
+      font-family: $kb-text-font;
+      font-size: 1em;
+      color: $kb-blue;
+      vertical-align: top;
+      height: 30px;
+      width: 50%;
+      padding: 1px 5px 1px 5px;
+      margin-right: 3%;
+      border: solid 1px $kb-blue;
+    }
+    button {
+      font-family: $kb-button-font;
+      font-size: 1em;
+      color: $kb-aqua;
+      background-color: $kb-grey;
+      vertical-align: top;
+      height: 30px;
+      width: 25%;
+      border: solid 1px $kb-blue;
+    }
+  }
+  article {
+    margin-top: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 10px;
+    border: solid 1px $kb-teal;
+    div.return-group {
+      margin-bottom: 10px;
+      p {
+        font-family: $kb-text-font;
+        font-size: 1.25em;
+        font-weight: bold;
+        color: $kb-aqua;
+        margin: 0;
+        &.kb-label {
+          font-family: $kb-title-font;
+          font-size: 1em;
+          font-weight: normal;
+          color: $kb-blue;
+          text-decoration: underline;
+        }
+        &.kb-error {
+          color: red;
+        }
+      }
+    }
+    div.return-book {
+      margin-bottom: 10px;
+      div.book-group {
+        margin-bottom: 5px;
+        p {
+          font-family: $kb-text-font;
+          font-size: 1em;
+          color: $kb-aqua;
+          margin: 0;
+          &.kb-label {
+            font-family: $kb-title-font;
+            color: $kb-blue;
+          }
+        }
+      }
+    }
+    button {
+      font-family: $kb-button-font;
+      font-size: 1em;
+      color: $kb-aqua;
+      background-color: $kb-grey;
+      vertical-align: top;
+      height: 30px;
+      border: solid 1px $kb-blue;
+    }
+  }
+}
