@@ -4,6 +4,7 @@
   "description": "A demo of a tool that receives an ISBN, and returns a books title and author, confirming it is the correct book, as well as the ISBN that a bookstore will need to purchase the correct version of the book.",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "watch": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "heroku-postbuild": "./node_modules/webpack/bin/webpack.js"
   },
@@ -30,6 +31,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.7",
+    "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
