@@ -1,0 +1,17 @@
+<section class="wrapper">
+  <header>
+    <div class="banner"></div>
+    <div class="title-container">
+      <h1> ISBN Search Tool </h1>
+    </div>
+  </header>
+  <main>
+    <form ng-submit="$ctrl.enterPassword($ctrl.password)">
+      <label for="password">Enter Password to Continue:</label>
+      <label for="error" class="password-error" ng-show="$ctrl.passwordError">Password incorrect. Please try again.</label>
+      <input type="password" name="password" placeholder="Password" ng-model="$ctrl.password">
+      <button type="submit"> Submit </button>
+    </form>
+  </main>
+</section>
+<footer></footer>

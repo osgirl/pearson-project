@@ -79,7 +79,7 @@ main {
           text-decoration: underline;
         }
         &.kb-error {
-          color: red;
+          color: $kb-error;
         }
       }
     }

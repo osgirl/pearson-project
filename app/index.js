@@ -16,6 +16,7 @@ searchApp.run(['$rootScope', ($rs) => {
 
 require('./controllers')(searchApp);
 require('./components')(searchApp);
+require('./services')(searchApp);
 
 searchApp.config(['$routeProvider', '$locationProvider', ($rp, $lp) => {
   $lp.hashPrefix('');
@@ -23,7 +24,10 @@ searchApp.config(['$routeProvider', '$locationProvider', ($rp, $lp) => {
     .when('/search', {
       template: require('./html/search.html')
     })
+    .when('/landing', {
+      template: require('./html/landing.html')
+    })
     .otherwise({
-      redirectTo: '/search'
+      redirectTo: '/landing'
     });
 }]);
