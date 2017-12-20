@@ -1,0 +1,24 @@
+<section class="wrapper" ng-init="$ctrl.checkSignIn()">
+  <header>
+    <div class="banner">
+      <div class="nav">
+        <a href="#/search">Return to Search</a>
+      </div>
+    </div>
+    <div class="title-container">
+      <h1> ISBN Search Tool </h1>
+    </div>
+  </header>
+  <main>
+    <form name="form" ng-submit="$ctrl.uploadFile($ctrl.newData)">
+      <label for="file">Input file. File type should be .xls or .xlsx</label>
+      <input type="file" ngf-select name="file" ng-model="$ctrl.newData" ngf-pattern="'.xls,.csv,.xlsx'" accept=".xls,.csv,.xlsx" required>
+      <button type="submit" name="button">Submit</button>
+      <span class="progress" ng-show="$ctrl.newData.progress >= 0">
+        <div style="width:{{$ctrl.newData.progress}}%" ng-bind="$ctrl.newData.progress + '%'"></div>
+      </span>
+      <span ng-show="$ctrl.newData.result">Upload successful</span>
+      <span class="err" ng-show="$ctrl.errorMsg">{{$ctrl.errorMsg}}</span>
+    </form>
+  </main>
+</section>

@@ -4,6 +4,19 @@ header {
     background-color: $kb-blue;
     height: 35px;
     width: 100%;
+    div.nav {
+      width: 25%;
+      margin-left: 70%;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      a {
+        color: white;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   div.title-container {
@@ -55,6 +68,17 @@ main {
       height: 30px;
       width: 25%;
       border: solid 1px $kb-blue;
+    }
+    .progress {
+      line-height: 15px;
+      display: inline-block;
+      width: 100px;
+      border: 3px groove black;
+      div {
+        font-size: smaller;
+        background: orange;
+        width: 0;
+      }
     }
   }
   article {

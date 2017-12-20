@@ -1,11 +1,14 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('SearchController', ['$log', '$location', 'password', SearchController]);
-  function SearchController($log, $location, passwordService) {
+  app.controller('SearchController', ['$http', '$log', '$location', '$timeout', 'password', SearchController]);
+  function SearchController($http, $log, $location, $timeout, passwordService) {
     this.return = {searchISBN: '', title: '', edition: '', author: '', returnISBN: ''};
     this.error = {searchISBN: ''};
+    this.bookArray = [];
     this.showReturn = false;
+    this.showPXE = false;
+    this.showUPDF = false;
     this.showError = false;
 
     this.checkSignIn = function() {
@@ -13,8 +16,18 @@ module.exports = function(app) {
       if (passwordService.entered === false) {
         $location.path('/landing');
       } else {
-        $log.log('Password Entered');
+        this.getBookArray();
       }
+    };
+
+    this.getBookArray = function() {
+      $log.debug('SearchController.getBookArray()');
+      $http.get(this.baseUrl + '/excel', this.httpConfig).then((res) => {
+        $log.log('Successfully returned bookArray');
+        this.bookArray = res.data;
+      }, (err) => {
+        $log.log('error in SearchController.getBookArray()', err);
+      });
     };
 
     this.clearReturn = function() {
@@ -23,55 +36,34 @@ module.exports = function(app) {
       this.error = {searchISBN: ''};
       this.showError = false;
       this.showReturn = false;
+      this.showPXE = false;
+      this.showUPDF = false;
       this.searchISBN = '';
     };
 
     this.search = function(id) {
       $log.debug('SearchController.search('+ id +')');
       this.clearReturn();
-      let escDda = this.escDda.filter((book) => {
-        return book.A === id || book.B === id || book.C === id;
+      let bookReturn = this.bookArray.filter((book) => {
+        return book.printISBN === id || book.mainTitleISBN === id || book.allInclusiveISBN === id || book.uPDFISBN === id || book.pXEISBN === id || book.looseLeafSveISBN === id || book.llvSveISBNWithAccessCard === id || book.twoDLISBN === id || book.revel === id || book.myLab === id;
       });
-      if (escDda.length > 0) {
-        $log.log('escDda.length', escDda.length);
-        let ret = escDda[0];
-        this.return = {searchISBN: id, title: ret.D, edition: ret.E, author: ret.F, returnISBN: ret.B};
+      if (bookReturn.length > 0) {
+        $log.log('bookReturn.length', bookReturn.length);
+        let ret = bookReturn[0];
+        this.return = {searchISBN: id, title: ret.printTitle};
+        if (ret.pXEISBN) {
+          this.return.returnISBN = ret.pXEISBN;
+          this.showPXE = true;
+        } else if (ret.uPDFISBN) {
+          this.return.returnISBN = ret.uPDFISBN;
+          this.showUPDF = true;
+        } else {
+          this.return.returnISBN = 'No PXE or uPDF ISBN associated with this title';
+        }
         this.showReturn = true;
-        return;
-      }
-      let itp = this.itp.filter((book) => {
-        return book.A === id || book.B === id || book.C === id || book.D === id;
-      });
-      if (itp.length > 0) {
-        $log.log('itp.length', itp.length);
-        let ret = itp[0];
-        this.return = {searchISBN: id, title: ret.E, edition: ret.F, author: ret.H, returnISBN: ret.B};
-        this.showReturn = true;
-        return;
-      }
-      let revel = this.revel.filter((book) => {
-        return book.A === id || book.B === id;
-      });
-      if (revel.length > 0) {
-        $log.log('revel.length', revel.length);
-        let ret = revel[0];
-        this.return = {searchISBN: id, title: ret.C, edition: ret.D, author: ret.H, returnISBN: ret.B};
-        this.showReturn = true;
-        return;
       }
 
-      let higherEd = this.higherEd.filter((book) => {
-        return book.A === id || book.B === id || book.C === id || book.D === id || book.O === id || book.P === id || book.Q === id || book.R === id;
-      });
-      if (higherEd.length > 0) {
-        $log.log('higherEd.length', higherEd.length);
-        let ret = higherEd[0];
-        this.return = {searchISBN: id, title: ret.E, edition: ret.F, author: ret.H, returnISBN: ret.B};
-        this.showReturn = true;
-        return;
-      }
-
-      if (higherEd.length === 0 && revel.length === 0 && escDda.length === 0 && itp.length === 0) {
+      if (bookReturn.length === 0) {
         this.error = {searchISBN: id};
         this.showError = true;
       }

@@ -5,13 +5,17 @@ require('./scss/base.scss');
 
 const angular = require('angular');
 const angularRoute = require('angular-route');
-const searchApp = angular.module('searchApp', [angularRoute]);
+const ngFileUpload = require('ng-file-upload');
+const searchApp = angular.module('searchApp', [angularRoute, ngFileUpload]);
 
 searchApp.run(['$rootScope', ($rs) => {
-  $rs.higherEd = require('./assets/dads-data-higher-ed.json');
-  $rs.escdda = require('./assets/dads-data-esc-dda-only.json');
-  $rs.itp = require('./assets/dads-data-itp.json');
-  $rs.revel = require('./assets/dads-data-revel.json');
+  $rs.baseUrl = `${__API_URL__}/api`;
+  $rs.httpConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  };
 }]);
 
 require('./controllers')(searchApp);
@@ -21,11 +25,14 @@ require('./services')(searchApp);
 searchApp.config(['$routeProvider', '$locationProvider', ($rp, $lp) => {
   $lp.hashPrefix('');
   $rp
+    .when('/landing', {
+      template: require('./html/landing.html')
+    })
     .when('/search', {
       template: require('./html/search.html')
     })
-    .when('/landing', {
-      template: require('./html/landing.html')
+    .when('/upload', {
+      template: require('./html/upload.html')
     })
     .otherwise({
       redirectTo: '/landing'

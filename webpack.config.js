@@ -4,8 +4,13 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractText = require('extract-text-webpack-plugin');
 
+const API_URL = JSON.stringify(process.env.API_URL || 'http://localhost:3000');
+
 var plugins = [
   new ExtractText('bundle.css'),
+  new webpack.DefinePlugin({
+    __API_URL__: API_URL,
+  }),
   new webpack.LoaderOptionsPlugin({
     options: {
       postcss: [autoprefixer]
@@ -19,6 +24,11 @@ module.exports = {
   output: {
     path: `${__dirname}/build`,
     filename: 'bundle.js'
+  },
+  node: {
+    fs: false,
+    process: false,
+    Buffer: false
   },
   module:{
     rules: [
