@@ -35,6 +35,14 @@
           <p class="kb-label">Title:</p>
           <p>{{$ctrl.return.title}}</p>
         </div>
+        <div class="book-group">
+          <p class="kb-label">Author:</p>
+          <p>{{$ctrl.return.author}}</p>
+        </div>
+        <div class="book-group">
+          <p class="kb-label">Edition:</p>
+          <p>{{$ctrl.return.edition}}</p>
+        </div>
       </div>
       <div class="return-group" ng-show="!$ctrl.showUPDF && !$ctrl.showPXE">
         <p class="kb-label">No PXE or uPDF ISBN found</p>

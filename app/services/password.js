@@ -3,7 +3,8 @@
 module.exports = function (app) {
   app.factory('password', [function() {
     return {
-      entered: false
+      main: false,
+      upload: false
     };
   }]);
 };

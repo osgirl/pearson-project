@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = promise;
 
 let bookSchema = mongoose.Schema({
+  lastName: {type: String, required: true},
+  edition: {type: String, required: true},
+  year: String,
   printISBN: {type: String, required: true, unique: true},
   printTitle: {type: String, required: true},
   mainTitleISBN: {type: String, unique: true, sparse: true},

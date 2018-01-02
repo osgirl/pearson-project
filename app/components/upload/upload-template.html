@@ -9,7 +9,15 @@
       <h1> ISBN Search Tool </h1>
     </div>
   </header>
-  <main>
+  <main ng-show="!$ctrl.passwordEntered">
+    <form ng-submit="$ctrl.enterPassword($ctrl.password)">
+      <label for="password">Enter Password to upload new spreadsheet:</label>
+      <label for="error" class="password-error" ng-show="$ctrl.passwordError">Password incorrect. Please try again.</label>
+      <input type="password" name="password" placeholder="Password" autocomplete="false" ng-model="$ctrl.password">
+      <button type="submit"> Submit </button>
+    </form>
+  </main>
+  <main ng-show="$ctrl.passwordEntered">
     <form name="form" ng-submit="$ctrl.uploadFile($ctrl.newData)">
       <label for="file">Input file. File type should be .xls or .xlsx</label>
       <input type="file" ngf-select name="file" ng-model="$ctrl.newData" ngf-pattern="'.xls,.csv,.xlsx'" accept=".xls,.csv,.xlsx" required>

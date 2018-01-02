@@ -20,6 +20,9 @@ excelRouter.post('/', multipartyMiddleware, (req, res, next) => {
   let bookArray = bookJson.map(function(row) {
     let newBook = new Book();
     newBook.printISBN = row['Print ISBN'];
+    newBook.lastName = row['Last Name'];
+    newBook.edition = row['Edition'];
+    newBook.year = row['Copyright Year'];
     newBook.printTitle = row['Print Title'];
     if (row['Main Title ISBN'] !== undefined) {
       newBook.mainTitleISBN = row['Main Title ISBN '];

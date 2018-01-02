@@ -13,7 +13,7 @@ module.exports = function(app) {
 
     this.checkSignIn = function() {
       $log.debug('SearchController.checkSignIn()');
-      if (passwordService.entered === false) {
+      if (passwordService.main === false) {
         $location.path('/landing');
       } else {
         this.getBookArray();
@@ -50,7 +50,7 @@ module.exports = function(app) {
       if (bookReturn.length > 0) {
         $log.log('bookReturn.length', bookReturn.length);
         let ret = bookReturn[0];
-        this.return = {searchISBN: id, title: ret.printTitle};
+        this.return = {searchISBN: id, title: ret.printTitle, edition: ret.edition, author: ret.lastName};
         if (ret.pXEISBN) {
           this.return.returnISBN = ret.pXEISBN;
           this.showPXE = true;

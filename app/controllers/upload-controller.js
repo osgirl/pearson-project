@@ -4,14 +4,34 @@ module.exports = function(app) {
   app.controller('UploadController', ['$http', '$log', '$location', '$timeout', 'password', 'Upload', UploadController]);
 
   function UploadController($http, $log, $location, $timeout, passwordService, Upload) {
-
+    this.passwordEntered = false;
+    this.passwordError = false;
 
     this.checkSignIn = function() {
       $log.debug('UploadController.checkSignIn()');
-      if (passwordService.entered === false) {
+      $log.log('passwordService', passwordService);
+      if (passwordService.main === false) {
         $location.path('/landing');
       } else {
         $log.log('Signed in');
+      }
+      if (passwordService.upload === false) {
+        $log.log('passwordService.upload === false');
+        this.passwordEntered = false;
+      } else  {
+        $log.log('passwordService.upload !==false');
+        this.passwordEntered = true;
+      }
+    };
+
+    this.enterPassword = function(password) {
+      $log.debug('UploadController.enterPassword(' + password + ')');
+      if(password === 'DDAupdate') {
+        this.passwordEntered = true;
+        this.passwordError = false;
+      } else  {
+        this.passwordEntered = false;
+        this.passwordError = true;
       }
     };
 

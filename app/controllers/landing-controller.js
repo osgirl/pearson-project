@@ -8,7 +8,7 @@ module.exports = function(app) {
 
     this.enterPassword = function(password) {
       if (password === 'PearsonDDA') {
-        passwordService.entered = true;
+        passwordService.main = true;
         $location.path('/search');
       } else {
         this.password = '';
