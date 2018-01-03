@@ -18,42 +18,41 @@ excelRouter.post('/', multipartyMiddleware, (req, res, next) => {
   let workbook = xlsx.readFile(req.files.file.path);
   let bookJson = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
   let bookArray = bookJson.map(function(row) {
+    let rowKeys = Object.keys(row);
     let newBook = new Book();
-    newBook.printISBN = row['Print ISBN'];
-    newBook.lastName = row['Last Name'];
-    newBook.edition = row['Edition'];
-    newBook.year = row['Copyright Year'];
-    newBook.printTitle = row['Print Title'];
-    if (row['Main Title ISBN '] !== undefined) {
-      newBook.mainTitleISBN = row['Main Title ISBN '];
-    }
-    if (row['Main Title ISBN'] !== undefined) {
-      newBook.mainTitleISBN = row['Main Title ISBN'];
-    }
-    if (row['All Inclusive ISBN'] !== undefined) {
-      newBook.allInclusiveISBN = row['All Inclusive ISBN'];
-    }
-    if (row['uPDF ISBN'] !== undefined) {
-      newBook.uPDFISBN = row['uPDF ISBN'];
-    }
-    if (row['PXE ISBN'] !== undefined) {
-      newBook.pXEISBN = row['PXE ISBN'];
-    }
-    if (row['Loose Leaf / SVE ISBN'] !== undefined) {
-      newBook.looseLeafISBN = row['Loose Leaf / SVE ISBN'];
-    }
-    if (row['LLV / SVE with Access Card ISBN'] !== undefined) {
-      newBook.llvSveISBNWithAccessCard = row ['LLV / SVE with Access Card ISBN'];
-    }
-    if (row['2DL ISBN'] !== undefined) {
-      newBook.twoDLISBN = row['2DL ISBN'];
-    }
-    if (row['REVEL'] !== undefined) {
-      newBook.revel = row['REVEL'];
-    }
-    if (row['MyLab'] !== undefined) {
-      newBook.myLab = row['MyLab'];
-    }
+    rowKeys.forEach((key) => {
+      if(key.replace(/\s/g, '').toLowerCase() === 'printisbn') {
+        newBook.printISBN = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'lastname') {
+        newBook.lastName = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'edition') {
+        newBook.edition = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'copyrightyear') {
+        newBook.year = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'printtitle') {
+        newBook.printTitle = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'maintitleisbn') {
+        newBook.mainTitleISBN = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'allinclusiveisbn') {
+        newBook.allInclusiveISBN = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'updfisbn') {
+        newBook.uPDFISBN = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'pxeisbn') {
+        newBook.pXEISBN = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'looseleaf/sveisbn') {
+        newBook.looseLeafSveISBN = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'llv/svewithaccesscardisbn') {
+        newBook.llvSveISBNWithAccessCard = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === '2dlisbn') {
+        newBook.twoDLISBN = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'revel') {
+        newBook.revel = row[key];
+      } else if(key.replace(/\s/g, '').toLowerCase() === 'mylab') {
+        newBook.myLab = row[key];
+      } else {
+        console.log('error, did not match', key);
+      }
+    });
     return newBook;
   });
   if( mongoose.connection.collections['books']) {

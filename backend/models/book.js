@@ -15,8 +15,8 @@ let bookSchema = mongoose.Schema({
   allInclusiveISBN: {type: String, sparse: true, unique: true},
   uPDFISBN: {type: String, sparse: true, unique: true},
   pXEISBN: {type: String, sparse: true, unique: true},
-  looseLeafSveISBN: {type: String, unique: true, sparse: true},
-  llvSveISBNWithAccessCard: {type: String, unique: true, sparse: true},
+  looseLeafSveISBN: String,
+  llvSveISBNWithAccessCard: String,
   twoDLISBN: {type: String, unique: true, sparse: true},
   revel: {type: String, unique: true, sparse: true},
   myLab: String
