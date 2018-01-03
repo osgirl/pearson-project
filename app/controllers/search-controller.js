@@ -23,6 +23,7 @@ module.exports = function(app) {
       $http.get(this.baseUrl + '/excel', this.httpConfig).then((res) => {
         $log.log('Successfully returned bookArray');
         this.bookArray = res.data;
+        $log.log('this.bookArray', this.bookArray);
       }, (err) => {
         $log.log('error in SearchController.getBookArray()', err);
       });
@@ -47,7 +48,7 @@ module.exports = function(app) {
         this.return = [];
         for (var i = 0; i < bookReturn.length; i++) {
           this.return[i] = {searchISBN: id, title: bookReturn[i].printTitle, edition: bookReturn[i].edition, author: bookReturn[i].lastName};
-          if (bookReturn[i].pxeISBN) {
+          if (bookReturn[i].pXEISBN) {
             this.return[i].returnISBN = bookReturn[i].pXEISBN;
             this.return[i].showPXE = true;
             this.return[i].showUPDF = false;
