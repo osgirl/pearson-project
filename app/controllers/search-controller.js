@@ -3,12 +3,10 @@
 module.exports = function(app) {
   app.controller('SearchController', ['$http', '$log', '$location', '$timeout', 'password', SearchController]);
   function SearchController($http, $log, $location, $timeout, passwordService) {
-    this.return = {searchISBN: '', title: '', edition: '', author: '', returnISBN: ''};
+    this.return = [{searchISBN: '', title: '', edition: '', author: '', returnISBN: '', showUPDF: false, showPXE: false}];
     this.error = {searchISBN: ''};
     this.bookArray = [];
     this.showReturn = false;
-    this.showPXE = false;
-    this.showUPDF = false;
     this.showError = false;
 
     this.checkSignIn = function() {
@@ -32,12 +30,10 @@ module.exports = function(app) {
 
     this.clearReturn = function() {
       $log.debug('SearchController.clearReturn()');
-      this.return = {searchISBN: '', title: '', edition: '', author: '', returnISBN: ''};
+      this.return = [{searchISBN: '', title: '', edition: '', author: '', returnISBN: '', showUPDF: false, showPXE: false}];
       this.error = {searchISBN: ''};
       this.showError = false;
       this.showReturn = false;
-      this.showPXE = false;
-      this.showUPDF = false;
       this.searchISBN = '';
     };
 
@@ -48,16 +44,20 @@ module.exports = function(app) {
         return book.printISBN === id || book.mainTitleISBN === id || book.allInclusiveISBN === id || book.uPDFISBN === id || book.pXEISBN === id || book.looseLeafSveISBN === id || book.llvSveISBNWithAccessCard === id || book.twoDLISBN === id || book.revel === id || book.myLab === id;
       });
       if (bookReturn.length > 0) {
-        let ret = bookReturn[0];
-        this.return = {searchISBN: id, title: ret.printTitle, edition: ret.edition, author: ret.lastName};
-        if (ret.pXEISBN) {
-          this.return.returnISBN = ret.pXEISBN;
-          this.showPXE = true;
-        } else if (ret.uPDFISBN) {
-          this.return.returnISBN = ret.uPDFISBN;
-          this.showUPDF = true;
-        } else {
-          this.return.returnISBN = 'No PXE or uPDF ISBN associated with this title';
+        this.return = [];
+        for (var i = 0; i < bookReturn.length; i++) {
+          this.return[i] = {searchISBN: id, title: bookReturn[i].printTitle, edition: bookReturn[i].edition, author: bookReturn[i].lastName};
+          if (bookReturn[i].pxeISBN) {
+            this.return[i].returnISBN = bookReturn[i].pXEISBN;
+            this.return[i].showPXE = true;
+            this.return[i].showUPDF = false;
+          } else if (bookReturn[i].uPDFISBN) {
+            this.return[i].returnISBN = bookReturn[i].uPDFISBN;
+            this.return[i].showUPDF = true;
+            this.return[i].showPXE = false;
+          } else {
+            this.return[i].returnISBN = 'No PXE or uPDF ISBN associated with this title';
+          }
         }
         this.showReturn = true;
       }

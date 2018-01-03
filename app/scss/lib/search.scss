@@ -109,6 +109,10 @@ main {
     }
     div.return-book {
       margin-bottom: 10px;
+      border: thin solid $kb-teal;
+      padding: 5px;
+      width: 50%;
+      display: inline-block;
       div.book-group {
         margin-bottom: 5px;
         p {
@@ -131,6 +135,9 @@ main {
       vertical-align: top;
       height: 30px;
       border: solid 1px $kb-blue;
+      &.clear-results {
+        display: block;
+      }
     }
   }
 }
