@@ -24,8 +24,12 @@ excelRouter.post('/', multipartyMiddleware, (req, res, next) => {
     newBook.edition = row['Edition'];
     newBook.year = row['Copyright Year'];
     newBook.printTitle = row['Print Title'];
-    if (row['Main Title ISBN'] !== undefined) {
+    console.log('row', row);
+    if (row['Main Title ISBN '] !== undefined) {
       newBook.mainTitleISBN = row['Main Title ISBN '];
+    }
+    if (row['Main Title ISBN'] !== undefined) {
+      newBook.mainTitleISBN = row['Main Title ISBN'];
     }
     if (row['All Inclusive ISBN'] !== undefined) {
       newBook.allInclusiveISBN = row['All Inclusive ISBN'];
@@ -53,7 +57,6 @@ excelRouter.post('/', multipartyMiddleware, (req, res, next) => {
     }
     return newBook;
   });
-  console.log('mongoose.connection.collections[books]', mongoose.connection.collections['books']);
   if( mongoose.connection.collections['books']) {
     console.log('collection found');
     mongoose.connection.collections['books'].drop(function(err) {
