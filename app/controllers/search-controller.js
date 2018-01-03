@@ -21,9 +21,7 @@ module.exports = function(app) {
     this.getBookArray = function() {
       $log.debug('SearchController.getBookArray()');
       $http.get(this.baseUrl + '/excel', this.httpConfig).then((res) => {
-        $log.log('Successfully returned bookArray');
         this.bookArray = res.data;
-        $log.log('this.bookArray', this.bookArray);
       }, (err) => {
         $log.log('error in SearchController.getBookArray()', err);
       });

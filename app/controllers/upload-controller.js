@@ -9,7 +9,6 @@ module.exports = function(app) {
 
     this.checkSignIn = function() {
       $log.debug('UploadController.checkSignIn()');
-      $log.log('passwordService', passwordService);
       if (passwordService.main === false) {
         $location.path('/landing');
       } else {
@@ -42,7 +41,6 @@ module.exports = function(app) {
         method: 'POST',
         data: {file: file}
       });
-      $log.log('file.upload', file.upload);
       file.upload.then((res) => {
         $timeout(() => {
           file.result = res.data;
