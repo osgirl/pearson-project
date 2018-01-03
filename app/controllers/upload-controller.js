@@ -28,9 +28,11 @@ module.exports = function(app) {
       $log.debug('UploadController.enterPassword(' + password + ')');
       if(password === 'DDAupdate') {
         this.passwordEntered = true;
+        passwordService.upload = true;
         this.passwordError = false;
       } else  {
         this.passwordEntered = false;
+        passwordService.upload = false;
         this.passwordError = true;
       }
     };
