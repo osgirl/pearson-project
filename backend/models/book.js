@@ -11,7 +11,7 @@ let bookSchema = mongoose.Schema({
   year: String,
   printISBN: {type: String, required: true, unique: true},
   printTitle: {type: String, required: true},
-  mainTitleISBN: {type: String, unique: true, sparse: true},
+  mainTitleISBN: String,
   allInclusiveISBN: {type: String, sparse: true, unique: true},
   uPDFISBN: {type: String, sparse: true, unique: true},
   pXEISBN: {type: String, sparse: true, unique: true},

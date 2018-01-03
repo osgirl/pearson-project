@@ -24,7 +24,6 @@ excelRouter.post('/', multipartyMiddleware, (req, res, next) => {
     newBook.edition = row['Edition'];
     newBook.year = row['Copyright Year'];
     newBook.printTitle = row['Print Title'];
-    console.log('row', row);
     if (row['Main Title ISBN '] !== undefined) {
       newBook.mainTitleISBN = row['Main Title ISBN '];
     }
